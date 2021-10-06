@@ -42,8 +42,8 @@ def main() -> None:
     while True:
         now = datetime.now()
         current_sec = now.second
-        # if 0 == current_sec % 60:
-        if True:
+        if 0 == current_sec % 60:
+        # if True:
             try:
                 with urllib.request.urlopen(url, context=context) as response:
                     body = response.read()
