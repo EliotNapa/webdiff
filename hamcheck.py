@@ -69,11 +69,11 @@ def main() -> None:
                             for r in diff:
                                 if r[0:1] in ['+', '-']:
                                     print(r.strip())
-                        elif cur_lines is not None:
-                            for r in cur_lines:
-                                print('+ ' + r.strip())
+                        # elif cur_lines is not None:
+                        #     for r in cur_lines:
+                        #         print('+ ' + r.strip())
 
-                    pre_lines = cur_lines
+                        pre_lines = cur_lines
                     
 
             except urllib.error.URLError as e:
