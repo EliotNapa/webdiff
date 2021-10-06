@@ -17,7 +17,7 @@ import pprint
 from datetime import datetime
 
 
-def main():
+def main() -> None:
     #監視記事のURLをセット
     url = None
 
@@ -30,7 +30,6 @@ def main():
     context.check_hostname = False
     context.verify_mode = ssl.CERT_NONE
 
-    pre_buff = None
     pre_lines = None
 
     d = difflib.Differ()
@@ -42,24 +41,17 @@ def main():
             try:
                 with urllib.request.urlopen(url, context=context) as response:
                     body = response.read()
-                    headers = response.getheaders()
                     status = response.getcode()
-
-                    folder = '{0:%Y%m%m%H%M%S}'.format(now)
-                    if not os.path.exists(folder):
-                        os.makedirs(folder, exist_ok = True)
 
                     print('{0}:{1}'.format(now, status))
                     cur_lines = body.decode('utf-8')
+                    cur_lines = cur_lines.splitlines()
 
-                    diff_file = folder + '\diff.txt'
                     if pre_lines is not None:
-                        diff = difflib.ndiff(cur_lines, pre_lines)
-                        with open(diff_file, mode='w', encoding="utf-8") as fw:
-                            for r in diff:
-                                if r[0:1] in ['+', '-']:
-                                    print(r.strip())
-                                    fw.write(r)
+                        diff = list(d.compare(cur_lines, pre_lines))
+                        for r in diff:
+                            if r[0:1] in ['+', '-']:
+                                print(r.strip())
 
                     pre_lines = cur_lines
                     
