@@ -22,7 +22,7 @@ def main() -> None:
     url = None
 
     if len(sys.argv) < 2 or 0 != sys.argv[1].find('http'):
-        print('usage python3 hamuget.py <URL>')
+        print('usage python3 webdiff.py <URL>')
         return
     url = sys.argv[1]
 
