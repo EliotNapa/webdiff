@@ -35,14 +35,15 @@ def main() -> None:
     context.check_hostname = False
     context.verify_mode = ssl.CERT_NONE
 
-    pre_lines = None
+    pre_lines = []
 
     d = difflib.Differ()
 
     while True:
         now = datetime.now()
         current_sec = now.second
-        if 0 == current_sec % 60:
+        # if 0 == current_sec % 60:
+        if True:
             try:
                 with urllib.request.urlopen(url, context=context) as response:
                     body = response.read()
@@ -58,9 +59,11 @@ def main() -> None:
                     if cur_innner is not None:
                         cur_ele = cur_innner.decode_contents(formatter="html")
                         cur_lines = cur_ele.splitlines()
-                        cur_lines = [s + '\n' for s in cur_lines]
-                        #pprint.pprint(cur_lines)
-
+                        # pprint.pprint(cur_lines)
+                        # cur_lines = [(s + '\n') for s in cur_lines]
+                        # '\n'.join(cur_lines)
+                        # pprint.pprint(cur_lines)
+                        # return
                         if pre_lines is not None:
                             diff = list(d.compare(pre_lines, cur_lines))
                             for r in diff:
