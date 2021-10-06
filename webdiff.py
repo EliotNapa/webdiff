@@ -48,7 +48,7 @@ def main() -> None:
                     cur_lines = cur_lines.splitlines()
 
                     if pre_lines is not None:
-                        diff = list(d.compare(cur_lines, pre_lines))
+                        diff = list(d.compare(pre_lines, cur_lines))
                         for r in diff:
                             if r[0:1] in ['+', '-']:
                                 print(r.strip())
